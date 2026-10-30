@@ -1,0 +1,75 @@
+{
+  "checked_on": "2026-10-30",
+  "sources": {
+    "clickhouse": {
+      "requested_revision": "2da63c1b42ca",
+      "sha": "2da63c1b42ca1b31e42fae8837c6508a0eb07cff",
+      "commit_date_utc": "2026-09-02T16:58:09Z",
+      "commit_url": "https://github.com/ClickHouse/ClickHouse/commit/2da63c1b42ca1b31e42fae8837c6508a0eb07cff",
+      "http_status": 200
+    },
+    "clickbench": {
+      "requested_revision": "fa52f8524ad9",
+      "sha": "fa52f8524ad9446695018fda6a415aade3a4ccd9",
+      "commit_date_utc": "2026-09-02T13:32:39Z",
+      "commit_url": "https://github.com/ClickHouse/ClickBench/commit/fa52f8524ad9446695018fda6a415aade3a4ccd9",
+      "http_status": 200
+    }
+  },
+  "files": [
+    {
+      "path": "third_party/clickbench/README.md",
+      "sha256": "fda255fb1d83d70f06866d768e9ce58cc14c4c89aef44441937295cc35053ac0",
+      "git_blob_sha1": "9fd9423a534d84245fccba0bf7b7218634898453",
+      "github_blob_verified": true
+    },
+    {
+      "path": "third_party/clickbench/LICENSE",
+      "sha256": "9d42e8bf72619767ff7534116151204a976a4894a5082ed45db977e63360e215",
+      "git_blob_sha1": "0f55d62d28dafa303fb67f3427bbbd7c78db2df5",
+      "github_blob_verified": true
+    },
+    {
+      "path": "third_party/clickbench/clickhouse/create.sql",
+      "sha256": "c1082ee0d86467a7c66ce3059e37461333d7078b288935f7c93fd6d92102a3dd",
+      "git_blob_sha1": "a6311a5a8cd5ddbbf93d9236b7c2dc1ed73434dd",
+      "github_blob_verified": true
+    },
+    {
+      "path": "third_party/clickbench/clickhouse/queries.sql",
+      "sha256": "a7d6673357348ee9680443216b6f26f30d1dce9f313b419d38502417b2c2a219",
+      "git_blob_sha1": "31f65fc898d8081f7cc3deb40f2e4f15a2f665b4",
+      "github_blob_verified": true
+    },
+    {
+      "path": "third_party/clickbench/clickhouse/load",
+      "sha256": "8b9ed1f9619cd26c372a052950c8b8297cc01637f912db6566cd849042567f3d",
+      "git_blob_sha1": "df578a617cec2184a71c155ae36dd04c92b5cf92",
+      "github_blob_verified": true
+    },
+    {
+      "path": "third_party/clickbench/clickhouse/install",
+      "sha256": "d5168178c87df9d3065d3ab860f60993904df0a6e31853cb6fc0e732cd16674b",
+      "git_blob_sha1": "d79f6ef8230cdd050bca651f0b570ed3fd403eed",
+      "github_blob_verified": true
+    },
+    {
+      "path": "third_party/clickhouse/config.xml",
+      "sha256": "b44de4e65a74303c4b73e51c1a311f93fc642176c2129f5e340107b1807871c9",
+      "git_blob_sha1": "40eb34dd922c6e746ca745f9b97b3e96ad4afc41",
+      "github_blob_verified": true
+    },
+    {
+      "path": "third_party/clickhouse/users.xml",
+      "sha256": "598db9a19791a8ce4206db3ed1537c68552fc455b587cefdf588d61d675d20c7",
+      "git_blob_sha1": "faa4de1cca98273db396644b9b165f45beb2a8a5",
+      "github_blob_verified": true
+    },
+    {
+      "path": "third_party/clickhouse/LICENSE",
+      "sha256": "af5d33e7f3dbbd25e889d8bdc61c83562c257d20c22386bb04106cd22937341a",
+      "git_blob_sha1": "f1da7e1a39450a88d02db05bbf213cdb25805a5a",
+      "github_blob_verified": true
+    }
+  ]
+}

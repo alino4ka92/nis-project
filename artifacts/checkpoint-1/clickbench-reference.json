@@ -1,0 +1,57 @@
+{
+  "method": "PyArrow reads the frozen Parquet; Python counts and sums the original values",
+  "rows": 1000659,
+  "distinct_counters": 3830,
+  "distinct_users": 823561,
+  "first_event_utc": "2013-07-01T20:00:02+00:00",
+  "last_event_utc": "2013-07-31T19:59:52+00:00",
+  "counter_id": 251755,
+  "selectivity": 0.0010033387997309773,
+  "query": "SELECT count() AS matched_rows, sum(ResolutionWidth) AS width_sum FROM nis_smoke.hits WHERE CounterID = 251755",
+  "expected": {
+    "matched_rows": 1004,
+    "width_sum": 1522846
+  },
+  "most_frequent_counters": [
+    {
+      "counter_id": 3922,
+      "rows": 85292
+    },
+    {
+      "counter_id": 199550,
+      "rows": 71365
+    },
+    {
+      "counter_id": 105857,
+      "rows": 58085
+    },
+    {
+      "counter_id": 46429,
+      "rows": 45785
+    },
+    {
+      "counter_id": 225510,
+      "rows": 42417
+    },
+    {
+      "counter_id": 122612,
+      "rows": 35448
+    },
+    {
+      "counter_id": 244045,
+      "rows": 33679
+    },
+    {
+      "counter_id": 233773,
+      "rows": 29556
+    },
+    {
+      "counter_id": 178321,
+      "rows": 27025
+    },
+    {
+      "counter_id": 245438,
+      "rows": 25290
+    }
+  ]
+}

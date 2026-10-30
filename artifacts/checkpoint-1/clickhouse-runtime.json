@@ -1,0 +1,55 @@
+{
+  "checked_on": "2026-10-30",
+  "source_commit": "2da63c1b42ca1b31e42fae8837c6508a0eb07cff",
+  "server_version": "26.9.1.552",
+  "binary": {
+    "url": "https://clickhouse-builds.s3.amazonaws.com/REFs/master/2da63c1b42ca1b31e42fae8837c6508a0eb07cff/masterci/build_arm_release/clickhouse",
+    "sha256": "d47eff7f4b065205e4891b4e9bd2c81c06e53f28d71d67158e3cdd993e33a477",
+    "ci_build_url": "https://github.com/ClickHouse/ClickHouse/actions/runs/33661752931/job/100451312043"
+  },
+  "base_image": "ubuntu:22.04@sha256:076e7bf82319619f28dd0aa9c02ab34b055ad37100395b4f49a2ffba04fb5e11",
+  "docker_context": "colima-nis-project",
+  "container": {
+    "id": "fbf1ecc5c49ea8ff9c7c39f2edd0b008d41c6da5bda76d69d0a739208ad3a148",
+    "image_id": "sha256:ff1aa6d38179c1a7ce832899e6303191c2f44344dd6e4ed6b0a2a0d5353afd2d",
+    "tag": "nis-clickhouse:2da63c1b42ca",
+    "platform": "linux",
+    "status": "running",
+    "started_at": "2026-10-30T10:35:50.283573012Z",
+    "ports": {},
+    "ulimits": [
+      {
+        "Name": "nofile",
+        "Hard": 262144,
+        "Soft": 262144
+      }
+    ],
+    "mounts": [
+      {
+        "type": "volume",
+        "name": "nis-clickhouse-data",
+        "destination": "/var/lib/clickhouse",
+        "rw": true
+      }
+    ]
+  },
+  "verification": {
+    "command": "docker --context colima-nis-project exec --interactive nis-clickhouse clickhouse-client --multiquery --format JSONEachRow < sql/checkpoint-1-smoke.sql",
+    "exit_code": 0,
+    "result_file": "artifacts/checkpoint-1/clickhouse-smoke.jsonl",
+    "checked_assertions": [
+      "server_version == 26.9.1.552",
+      "VERSION_GITHASH == 2da63c1b42ca1b31e42fae8837c6508a0eb07cff",
+      "SELECT 1 AS result == 1"
+    ]
+  },
+  "first_client_attempt": {
+    "exit_code": 1,
+    "output": "Decompressing the binary\nopen: Is a directory\nError happened during decompression.",
+    "resolution": "The client was started during first-start binary decompression. After the server reported Ready for connections, the original client command succeeded."
+  },
+  "disk_check": {
+    "command": "docker --context colima-nis-project exec nis-clickhouse df -h /var/lib/clickhouse /usr/bin",
+    "output": "Filesystem      Size  Used Avail Use% Mounted on\n/dev/vdb1        30G  6.6G   22G  24% /var/lib/clickhouse\noverlay          30G  6.6G   22G  24% /"
+  }
+}

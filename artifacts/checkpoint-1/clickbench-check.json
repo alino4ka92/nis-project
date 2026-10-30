@@ -1,0 +1,437 @@
+{
+  "server_version": "26.9.27.3",
+  "resources": {
+    "architecture": "aarch64",
+    "cpus": 4,
+    "memory_bytes": 8307757056
+  },
+  "stats": {
+    "rows": 1000659,
+    "distinct_counters": 3830,
+    "distinct_users": 823561,
+    "outside_sample": 0,
+    "first_event_utc": "2013-07-01 20:00:02",
+    "last_event_utc": "2013-07-31 19:59:52"
+  },
+  "counter_id": 251755,
+  "expected": {
+    "matched_rows": 1004,
+    "width_sum": 1522846
+  },
+  "actual": {
+    "matched_rows": 1004,
+    "width_sum": 1522846
+  },
+  "checks": {
+    "row_count_matches_parquet": true,
+    "counters_match_parquet": true,
+    "users_match_parquet": true,
+    "all_rows_satisfy_hash_predicate": true,
+    "probe_matches_python_reference": true
+  },
+  "passed": true,
+  "parts": [
+    {
+      "name": "all_1_1_0",
+      "rows": 360108,
+      "marks": 45,
+      "bytes_on_disk": 77427288,
+      "data_uncompressed_bytes": 211797654
+    },
+    {
+      "name": "all_2_2_0",
+      "rows": 330011,
+      "marks": 42,
+      "bytes_on_disk": 84594009,
+      "data_uncompressed_bytes": 219479927
+    },
+    {
+      "name": "all_3_3_0",
+      "rows": 310540,
+      "marks": 39,
+      "bytes_on_disk": 74240562,
+      "data_uncompressed_bytes": 198446674
+    }
+  ],
+  "explain": [
+    {
+      "explain": "Output: count(), sum(ResolutionWidth)"
+    },
+    {
+      "explain": ""
+    },
+    {
+      "explain": "Aggregating"
+    },
+    {
+      "explain": "\u2502  Keys:"
+    },
+    {
+      "explain": "\u2502  Aggregates: count(), sum(ResolutionWidth)"
+    },
+    {
+      "explain": "\u2502  Skip merging: 0"
+    },
+    {
+      "explain": "\u2514\u2500\u2500ReadFromMergeTree (nis_smoke.hits)"
+    },
+    {
+      "explain": "      Read type: Default"
+    },
+    {
+      "explain": "      Parts: 2 | Granules: 2"
+    },
+    {
+      "explain": "      Output: ResolutionWidth"
+    },
+    {
+      "explain": "      Prewhere filter"
+    },
+    {
+      "explain": "      Prewhere filter column:  CounterID = 251755"
+    },
+    {
+      "explain": "      Indexes:"
+    },
+    {
+      "explain": "        PrimaryKey"
+    },
+    {
+      "explain": "          Keys:"
+    },
+    {
+      "explain": "            CounterID"
+    },
+    {
+      "explain": "          Condition: (CounterID in [251755, 251755])"
+    },
+    {
+      "explain": "          Parts: 2/3"
+    },
+    {
+      "explain": "          Granules: 2/123"
+    },
+    {
+      "explain": "          Search Algorithm: binary search"
+    },
+    {
+      "explain": "        Ranges: 2"
+    }
+  ],
+  "query_profiles": [
+    {
+      "query_id": "nis-checkpoint-1-load-289e8d53ff584f64be897fbb26144acc",
+      "query_duration_ms": 1483,
+      "read_rows": 1000659,
+      "read_bytes": 171441785,
+      "written_rows": 1000659,
+      "memory_usage": 1696151125
+    },
+    {
+      "query_id": "nis-checkpoint-1-probe-8b5ae5e3a4ae45aaa322b882f25387dd",
+      "query_duration_ms": 10,
+      "read_rows": 16384,
+      "read_bytes": 81920,
+      "written_rows": 0,
+      "memory_usage": 469177
+    }
+  ],
+  "disk_before": [
+    {
+      "name": "default",
+      "free_space": 5832675328,
+      "total_space": 31524294656
+    }
+  ],
+  "disk_after": [
+    {
+      "name": "default",
+      "free_space": 5417553920,
+      "total_space": 31524294656
+    }
+  ],
+  "ddl": [
+    {
+      "statement": "CREATE TABLE nis_smoke.hits\n(\n    `WatchID` Int64,\n    `JavaEnable` Int16,\n    `Title` String,\n    `GoodEvent` Int16,\n    `EventTime` DateTime,\n    `EventDate` Date,\n    `CounterID` Int32,\n    `ClientIP` Int32,\n    `RegionID` Int32,\n    `UserID` Int64,\n    `CounterClass` Int16,\n    `OS` Int16,\n    `UserAgent` Int16,\n    `URL` String,\n    `Referer` String,\n    `IsRefresh` Int16,\n    `RefererCategoryID` Int16,\n    `RefererRegionID` Int32,\n    `URLCategoryID` Int16,\n    `URLRegionID` Int32,\n    `ResolutionWidth` Int16,\n    `ResolutionHeight` Int16,\n    `ResolutionDepth` Int16,\n    `FlashMajor` Int16,\n    `FlashMinor` Int16,\n    `FlashMinor2` String,\n    `NetMajor` Int16,\n    `NetMinor` Int16,\n    `UserAgentMajor` Int16,\n    `UserAgentMinor` String,\n    `CookieEnable` Int16,\n    `JavascriptEnable` Int16,\n    `IsMobile` Int16,\n    `MobilePhone` Int16,\n    `MobilePhoneModel` String,\n    `Params` String,\n    `IPNetworkID` Int32,\n    `TraficSourceID` Int16,\n    `SearchEngineID` Int16,\n    `SearchPhrase` String,\n    `AdvEngineID` Int16,\n    `IsArtifical` Int16,\n    `WindowClientWidth` Int16,\n    `WindowClientHeight` Int16,\n    `ClientTimeZone` Int16,\n    `ClientEventTime` DateTime,\n    `SilverlightVersion1` Int16,\n    `SilverlightVersion2` Int16,\n    `SilverlightVersion3` Int32,\n    `SilverlightVersion4` Int16,\n    `PageCharset` String,\n    `CodeVersion` Int32,\n    `IsLink` Int16,\n    `IsDownload` Int16,\n    `IsNotBounce` Int16,\n    `FUniqID` Int64,\n    `OriginalURL` String,\n    `HID` Int32,\n    `IsOldCounter` Int16,\n    `IsEvent` Int16,\n    `IsParameter` Int16,\n    `DontCountHits` Int16,\n    `WithHash` Int16,\n    `HitColor` String,\n    `LocalEventTime` DateTime,\n    `Age` Int16,\n    `Sex` Int16,\n    `Income` Int16,\n    `Interests` Int16,\n    `Robotness` Int16,\n    `RemoteIP` Int32,\n    `WindowName` Int32,\n    `OpenerName` Int32,\n    `HistoryLength` Int16,\n    `BrowserLanguage` String,\n    `BrowserCountry` String,\n    `SocialNetwork` String,\n    `SocialAction` String,\n    `HTTPError` Int16,\n    `SendTiming` Int32,\n    `DNSTiming` Int32,\n    `ConnectTiming` Int32,\n    `ResponseStartTiming` Int32,\n    `ResponseEndTiming` Int32,\n    `FetchTiming` Int32,\n    `SocialSourceNetworkID` Int16,\n    `SocialSourcePage` String,\n    `ParamPrice` Int64,\n    `ParamOrderID` String,\n    `ParamCurrency` String,\n    `ParamCurrencyID` Int16,\n    `OpenstatServiceName` String,\n    `OpenstatCampaignID` String,\n    `OpenstatAdID` String,\n    `OpenstatSourceID` String,\n    `UTMSource` String,\n    `UTMMedium` String,\n    `UTMCampaign` String,\n    `UTMContent` String,\n    `UTMTerm` String,\n    `FromTag` String,\n    `HasGCLID` Int16,\n    `RefererHash` Int64,\n    `URLHash` Int64,\n    `CLID` Int32\n)\nENGINE = MergeTree\nPRIMARY KEY (CounterID, EventDate, UserID, EventTime, WatchID)\nORDER BY (CounterID, EventDate, UserID, EventTime, WatchID)\nSETTINGS fsync_after_insert = 1, auto_statistics_types = '', index_granularity = 8192"
+    }
+  ],
+  "granularity": [
+    {
+      "name": "index_granularity",
+      "value": "8192"
+    },
+    {
+      "name": "index_granularity_bytes",
+      "value": "10485760"
+    }
+  ],
+  "commands": [
+    [
+      "docker",
+      "--context",
+      "colima-nis-project",
+      "exec",
+      "-i",
+      "nis-clickhouse",
+      "clickhouse-client",
+      "--format",
+      "JSONEachRow",
+      "--param_counter_id",
+      "251755",
+      "--query",
+      "SELECT name, free_space, total_space FROM system.disks"
+    ],
+    [
+      "docker",
+      "--context",
+      "colima-nis-project",
+      "info",
+      "--format",
+      "{{.Architecture}} {{.NCPU}} {{.MemTotal}}"
+    ],
+    [
+      "docker",
+      "--context",
+      "colima-nis-project",
+      "exec",
+      "-i",
+      "nis-clickhouse",
+      "clickhouse-client",
+      "--format",
+      "JSONEachRow",
+      "--param_counter_id",
+      "251755",
+      "--query",
+      "SELECT count() AS present FROM system.tables WHERE database = 'nis_smoke' AND name = 'hits'"
+    ],
+    [
+      "docker",
+      "--context",
+      "colima-nis-project",
+      "exec",
+      "-i",
+      "nis-clickhouse",
+      "clickhouse-client",
+      "--format",
+      "JSONEachRow",
+      "--param_counter_id",
+      "251755",
+      "--query",
+      "CREATE DATABASE IF NOT EXISTS nis_smoke"
+    ],
+    [
+      "docker",
+      "--context",
+      "colima-nis-project",
+      "exec",
+      "-i",
+      "nis-clickhouse",
+      "clickhouse-client",
+      "--database",
+      "nis_smoke",
+      "--multiquery"
+    ],
+    [
+      "docker",
+      "--context",
+      "colima-nis-project",
+      "exec",
+      "-i",
+      "nis-clickhouse",
+      "clickhouse-client",
+      "--format",
+      "JSONEachRow",
+      "--param_counter_id",
+      "251755",
+      "--query",
+      "SELECT count() AS rows FROM nis_smoke.hits"
+    ],
+    [
+      "docker",
+      "--context",
+      "colima-nis-project",
+      "exec",
+      "nis-clickhouse",
+      "mkdir",
+      "-p",
+      "/var/lib/clickhouse/user_files/nis-checkpoint-1"
+    ],
+    [
+      "docker",
+      "--context",
+      "colima-nis-project",
+      "cp",
+      "/Users/kderemina/nis-project/.local/data/checkpoint-1-all/hits_small.parquet",
+      "nis-clickhouse:/var/lib/clickhouse/user_files/nis-checkpoint-1/hits_small.parquet"
+    ],
+    [
+      "docker",
+      "--context",
+      "colima-nis-project",
+      "exec",
+      "-i",
+      "nis-clickhouse",
+      "clickhouse-client",
+      "--format",
+      "JSONEachRow",
+      "--param_counter_id",
+      "251755",
+      "--query",
+      "INSERT INTO nis_smoke.hits SELECT * FROM file('nis-checkpoint-1/hits_small.parquet', Parquet) SETTINGS max_threads = 2, max_insert_threads = 2, max_memory_usage = 3221225472",
+      "--query_id",
+      "nis-checkpoint-1-load-289e8d53ff584f64be897fbb26144acc"
+    ],
+    [
+      "docker",
+      "--context",
+      "colima-nis-project",
+      "exec",
+      "-i",
+      "nis-clickhouse",
+      "clickhouse-client",
+      "--format",
+      "JSONEachRow",
+      "--param_counter_id",
+      "251755",
+      "--query",
+      "SELECT count() AS rows, uniqExact(CounterID) AS distinct_counters, uniqExact(UserID) AS distinct_users, countIf(xxHash64(toString(toUInt64(WatchID))) % 100 != 0) AS outside_sample, toString(min(EventTime), 'UTC') AS first_event_utc, toString(max(EventTime), 'UTC') AS last_event_utc FROM nis_smoke.hits SETTINGS max_threads = 2, max_memory_usage = 3221225472"
+    ],
+    [
+      "docker",
+      "--context",
+      "colima-nis-project",
+      "exec",
+      "-i",
+      "nis-clickhouse",
+      "clickhouse-client",
+      "--format",
+      "JSONEachRow",
+      "--param_counter_id",
+      "251755",
+      "--query",
+      "SELECT count() AS matched_rows, sum(ResolutionWidth) AS width_sum\nFROM nis_smoke.hits\nWHERE CounterID = {counter_id:UInt32}\nSETTINGS max_threads = 2, use_query_cache = 0",
+      "--query_id",
+      "nis-checkpoint-1-probe-8b5ae5e3a4ae45aaa322b882f25387dd"
+    ],
+    [
+      "docker",
+      "--context",
+      "colima-nis-project",
+      "exec",
+      "-i",
+      "nis-clickhouse",
+      "clickhouse-client",
+      "--format",
+      "JSONEachRow",
+      "--param_counter_id",
+      "251755",
+      "--query",
+      "EXPLAIN indexes = 1 SELECT count() AS matched_rows, sum(ResolutionWidth) AS width_sum\nFROM nis_smoke.hits\nWHERE CounterID = {counter_id:UInt32}\nSETTINGS max_threads = 2, use_query_cache = 0, use_query_condition_cache = 0, use_skip_indexes_on_data_read = 0"
+    ],
+    [
+      "docker",
+      "--context",
+      "colima-nis-project",
+      "exec",
+      "-i",
+      "nis-clickhouse",
+      "clickhouse-client",
+      "--format",
+      "JSONEachRow",
+      "--param_counter_id",
+      "251755",
+      "--query",
+      "SELECT name, rows, marks, bytes_on_disk, data_uncompressed_bytes FROM system.parts WHERE database = 'nis_smoke' AND table = 'hits' AND active ORDER BY name"
+    ],
+    [
+      "docker",
+      "--context",
+      "colima-nis-project",
+      "exec",
+      "-i",
+      "nis-clickhouse",
+      "clickhouse-client",
+      "--format",
+      "JSONEachRow",
+      "--param_counter_id",
+      "251755",
+      "--query",
+      "SYSTEM FLUSH LOGS"
+    ],
+    [
+      "docker",
+      "--context",
+      "colima-nis-project",
+      "exec",
+      "-i",
+      "nis-clickhouse",
+      "clickhouse-client",
+      "--format",
+      "JSONEachRow",
+      "--param_counter_id",
+      "251755",
+      "--query",
+      "SELECT query_id, query_duration_ms, read_rows, read_bytes, written_rows, memory_usage FROM system.query_log WHERE type = 'QueryFinish' AND (query_id IN ('nis-checkpoint-1-load-289e8d53ff584f64be897fbb26144acc', 'nis-checkpoint-1-probe-8b5ae5e3a4ae45aaa322b882f25387dd') OR (query_id LIKE 'nis-checkpoint-1-load-%' AND written_rows = 1000659)) ORDER BY event_time_microseconds"
+    ],
+    [
+      "docker",
+      "--context",
+      "colima-nis-project",
+      "exec",
+      "-i",
+      "nis-clickhouse",
+      "clickhouse-client",
+      "--format",
+      "JSONEachRow",
+      "--param_counter_id",
+      "251755",
+      "--query",
+      "SELECT version() AS version"
+    ],
+    [
+      "docker",
+      "--context",
+      "colima-nis-project",
+      "exec",
+      "-i",
+      "nis-clickhouse",
+      "clickhouse-client",
+      "--format",
+      "JSONEachRow",
+      "--param_counter_id",
+      "251755",
+      "--query",
+      "SELECT name, free_space, total_space FROM system.disks"
+    ],
+    [
+      "docker",
+      "--context",
+      "colima-nis-project",
+      "exec",
+      "-i",
+      "nis-clickhouse",
+      "clickhouse-client",
+      "--format",
+      "JSONEachRow",
+      "--param_counter_id",
+      "251755",
+      "--query",
+      "SHOW CREATE TABLE nis_smoke.hits"
+    ],
+    [
+      "docker",
+      "--context",
+      "colima-nis-project",
+      "exec",
+      "-i",
+      "nis-clickhouse",
+      "clickhouse-client",
+      "--format",
+      "JSONEachRow",
+      "--param_counter_id",
+      "251755",
+      "--query",
+      "SELECT name, value FROM system.merge_tree_settings WHERE name IN ('index_granularity', 'index_granularity_bytes')"
+    ]
+  ]
+}

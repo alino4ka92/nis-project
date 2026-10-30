@@ -1,0 +1,16 @@
+{
+  "checked_on": "2026-10-30",
+  "image": "clickhouse/clickhouse-server:26.9.27.3",
+  "manifest_digest": "sha256:925b0fbc8df74de7671404e688a4d99fd202910db3de8d524867e6f881c20be7",
+  "registry_url": "https://hub.docker.com/v2/repositories/clickhouse/clickhouse-server/tags/26.9.27.3",
+  "available_platforms": [
+    "linux/amd64",
+    "linux/arm64"
+  ],
+  "tested_platform": "linux/arm64",
+  "server_version": "26.9.27.3",
+  "source_commit": "4bea8b37b2588dd169ac54ac746bb82f09fd2c7b",
+  "probe_result": 1,
+  "verification_command": "docker --context colima-nis-project exec nis-clickhouse clickhouse-client --multiquery --queries-file /tmp/checkpoint-1-smoke.sql --format JSONEachRow",
+  "result_file": "artifacts/checkpoint-1/docker-image-smoke.jsonl"
+}

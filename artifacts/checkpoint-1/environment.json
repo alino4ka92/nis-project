@@ -1,0 +1,84 @@
+{
+  "checked_on": "2026-10-30",
+  "records": [
+    {
+      "command": [
+        "sw_vers",
+        "-productVersion"
+      ],
+      "exit_code": 0,
+      "stdout": "26.6.2",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "uname",
+        "-m"
+      ],
+      "exit_code": 0,
+      "stdout": "arm64",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "sysctl",
+        "-n",
+        "hw.logicalcpu"
+      ],
+      "exit_code": 0,
+      "stdout": "14",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "sysctl",
+        "-n",
+        "hw.memsize"
+      ],
+      "exit_code": 0,
+      "stdout": "51539607552",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "df",
+        "-h",
+        "."
+      ],
+      "exit_code": 0,
+      "stdout": "Filesystem      Size    Used   Avail Capacity iused ifree %iused  Mounted on\n/dev/disk3s5   926Gi   338Gi   567Gi    38%    2.4M  5.9G    0%   /System/Volumes/Data",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "docker",
+        "--version"
+      ],
+      "exit_code": 0,
+      "stdout": "Docker version 29.2.1, build a5c7197d72",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "colima",
+        "version"
+      ],
+      "exit_code": 0,
+      "stdout": "colima version 0.10.0\ngit commit: 7f5f27de13d921e66e3a78de0a838ddec581871a",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "docker",
+        "--context",
+        "colima-nis-project",
+        "info",
+        "--format",
+        "{{.NCPU}} {{.MemTotal}} {{.KernelVersion}} {{.Driver}}"
+      ],
+      "exit_code": 0,
+      "stdout": "4 8307757056 6.8.0-90-generic overlayfs",
+      "stderr": ""
+    }
+  ]
+}

@@ -1,0 +1,6 @@
+.local/
+.codex/
+.vscode/
+__pycache__/
+*.pyc
+*.parquet
