@@ -1,0 +1,4 @@
+{"phase": "warm", "repeat": 1, "query_id": "nis-kt1-metrics-a15252692a8d4e13bc3eaadb8275dca7-q1-warm1", "answer": [{"matched_rows": 1004, "width_sum": 1522846}]}
+{"phase": "measure", "repeat": 1, "query_id": "nis-kt1-metrics-a15252692a8d4e13bc3eaadb8275dca7-q1-measure1", "answer": [{"matched_rows": 1004, "width_sum": 1522846}]}
+{"phase": "measure", "repeat": 2, "query_id": "nis-kt1-metrics-a15252692a8d4e13bc3eaadb8275dca7-q1-measure2", "answer": [{"matched_rows": 1004, "width_sum": 1522846}]}
+{"phase": "measure", "repeat": 3, "query_id": "nis-kt1-metrics-a15252692a8d4e13bc3eaadb8275dca7-q1-measure3", "answer": [{"matched_rows": 1004, "width_sum": 1522846}]}

@@ -1,0 +1,13 @@
+{
+  "command": [
+    "python3",
+    "scripts/checkpoint-1/verify.py",
+    "--artifacts-dir",
+    ".local/results/participant-3-load-check"
+  ],
+  "sample_file": ".local/data/checkpoint-1-all/hits_small.parquet",
+  "expected_sha256": "dae45e89903e835d8d40b0b223e18d3182d2dc92c78cf37431ce7cb89f3b1af5",
+  "actual_sha256": "dae45e89903e835d8d40b0b223e18d3182d2dc92c78cf37431ce7cb89f3b1af5",
+  "sha256_matches": true,
+  "reference_matches": true
+}

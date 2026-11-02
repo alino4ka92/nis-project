@@ -6,7 +6,7 @@
 
 - Полное имя
 - Полное имя
-- Полное имя
+- Поливин Никита Евгеньевич
 
 ## Запуск
 
@@ -16,5 +16,6 @@
 
 - [Проект](nis/project.md), [план эксперимента](nis/experiment-plan.md), [КТ-1](nis/checkpoints/01.md).
 - [Технические проверки](nis/technical-checks.md) и [результат запуска бенчмарка](artifacts/checkpoint-1/benchmark/run.tsv).
+- [Проверка пяти метрик](artifacts/checkpoint-1/metrics/README.md): ответы проверочного запроса, измерения, `EXPLAIN` и сводка повторов.
 - [Код](scripts/checkpoint-1/), [SQL](sql/), [манифест датасета](artifacts/checkpoint-1/clickbench-sample.json). Данные хранятся в Docker volume и `.local/`.
 - [Состояние](nis/status.md), [результаты](nis/results.md), [финальная сдача](nis/final.md).

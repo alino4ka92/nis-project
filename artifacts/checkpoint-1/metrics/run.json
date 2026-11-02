@@ -1,0 +1,45 @@
+{
+  "run_id": "nis-kt1-metrics-a15252692a8d4e13bc3eaadb8275dca7",
+  "status": "complete",
+  "queries": 1,
+  "warmup_runs": 1,
+  "measured_runs": 3,
+  "table": "nis_smoke.hits",
+  "query_sha256": "0202320344200bc854f844cd6c01812f382ce007f44bb7c8cd413de814b808ad",
+  "sample_sha256": "dae45e89903e835d8d40b0b223e18d3182d2dc92c78cf37431ce7cb89f3b1af5",
+  "clickbench_revision": "fa52f8524ad9446695018fda6a415aade3a4ccd9",
+  "input_rows": 1000659,
+  "settings": {
+    "max_threads": 2,
+    "max_memory_usage": 3221225472,
+    "use_query_cache": 0,
+    "use_query_condition_cache": 0,
+    "use_skip_indexes_on_data_read": 0,
+    "log_queries": 1,
+    "log_profile_events": 1,
+    "log_queries_probability": 1,
+    "log_query_settings": 1
+  },
+  "started_at_utc": "2026-11-02T14:21:38.211282+00:00",
+  "command": [
+    "python3",
+    "scripts/checkpoint-1/measure_probe.py",
+    "--output-dir",
+    "artifacts/checkpoint-1/metrics"
+  ],
+  "host_platform": "Linux-6.6.87.2-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+  "server_version": "26.9.27.3",
+  "docker_context": "default",
+  "resources": {
+    "Architecture": "x86_64",
+    "NCPU": 16,
+    "MemTotal": 32392794112,
+    "KernelVersion": "6.6.87.2-microsoft-standard-WSL2"
+  },
+  "input_checks": {
+    "rows": 1000659,
+    "outside_sample": 0
+  },
+  "answers_match_reference": true,
+  "finished_at_utc": "2026-11-02T14:21:40.307186+00:00"
+}

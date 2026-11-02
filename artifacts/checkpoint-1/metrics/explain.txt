@@ -1,0 +1,21 @@
+Output: count(), sum(ResolutionWidth)
+
+Aggregating
+│  Keys:
+│  Aggregates: count(), sum(ResolutionWidth)
+│  Skip merging: 0
+└──ReadFromMergeTree (nis_smoke.hits)
+      Read type: Default
+      Parts: 2 | Granules: 2
+      Output: ResolutionWidth
+      Prewhere filter
+      Prewhere filter column:  CounterID = 251755
+      Indexes:
+        PrimaryKey
+          Keys:
+            CounterID
+          Condition: (CounterID in [251755, 251755])
+          Parts: 2/3
+          Granules: 2/124
+          Search Algorithm: binary search
+        Ranges: 2

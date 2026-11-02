@@ -1,0 +1,20 @@
+[
+  {
+    "name": "all_1_1_0",
+    "rows": 320119,
+    "marks": 41,
+    "bytes_on_disk": 82049837
+  },
+  {
+    "name": "all_2_2_0",
+    "rows": 359982,
+    "marks": 45,
+    "bytes_on_disk": 77549506
+  },
+  {
+    "name": "all_3_3_0",
+    "rows": 320558,
+    "marks": 41,
+    "bytes_on_disk": 76634344
+  }
+]

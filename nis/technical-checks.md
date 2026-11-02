@@ -23,3 +23,24 @@
 ## 6. Пробный запуск ClickBench
 
 [Команда запуска](../docker/checkpoint-1/README.md#пробный-запуск-clickbench). Ожидаются 43 строки с ответами и статусом `OK` в [run.tsv](../artifacts/checkpoint-1/benchmark/run.tsv).
+
+## 7. Проверка метрик
+
+При работающем `nis-clickhouse` и загруженной выборке выполнить из корня репозитория:
+
+```bash
+python3 scripts/checkpoint-1/measure_probe.py
+```
+
+Один прогрев и три измеряемых повтора; два потока и лимит памяти запроса 3 ГиБ. Для другого Docker-контекста добавить `--context ИМЯ_КОНТЕКСТА`.
+
+Ожидаются `passed: true`, ответ `matched_rows = 1004`, `width_sum = 1522846` во всех выполнениях и три записи со всеми пятью метриками. Пропуски, дубликаты и несовпадения завершают проверку ошибкой.
+
+Каталог прогона создаётся в `.local/results/checkpoint-1-metrics/`: настройки и статус — в `run.json`, ответы — в `answers.jsonl`, метрики — в `measurements.jsonl`, сводка — в `summary.tsv`. Также сохраняются `EXPLAIN`, DDL, parts и подтверждение завершения запросов.
+
+[Фактический результат](../artifacts/checkpoint-1/metrics/README.md). Повторная обработка сохранённых измерений без Docker и тесты:
+
+```bash
+python3 scripts/checkpoint-1/summarize_metrics.py artifacts/checkpoint-1/metrics
+python3 -m unittest discover -s scripts/checkpoint-1 -p 'test_*.py' -v
+```

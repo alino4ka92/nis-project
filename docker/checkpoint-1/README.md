@@ -40,6 +40,16 @@ docker compose run --rm --build benchmark
 
 Настройки прогрева, повторов и ресурсов меняются в сервисе `benchmark` файла `compose.yaml`.
 
+## Проверка метрик
+
+После загрузки выборки:
+
+```bash
+python3 scripts/checkpoint-1/measure_probe.py
+```
+
+Сохраняются ответы, пять обязательных метрик, `EXPLAIN` и сводка трёх повторов. [Описание проверки](../../nis/technical-checks.md#7-проверка-метрик), [сохранённый результат](../../artifacts/checkpoint-1/metrics/README.md).
+
 ## SQL-клиент и остановка
 
 ```bash
