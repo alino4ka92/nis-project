@@ -5,7 +5,6 @@ import hashlib
 import json
 from pathlib import Path
 import subprocess
-import uuid
 
 
 def main():
@@ -29,26 +28,21 @@ def main():
     docker = ["docker"]
     if args.context:
         docker.extend(["--context", args.context])
-    commands = []
 
     def run(arguments, sql_input=None):
         command = docker + arguments
-        commands.append(command)
         process = subprocess.run(command, input=sql_input, text=True, capture_output=True)
         if process.returncode:
             raise RuntimeError(f"Command failed: {command}\n{process.stderr}")
         return process.stdout
 
-    def query(sql, query_id=None):
+    def query(sql):
         command = [
             "exec", "-i", args.container, "clickhouse-client", "--format", "JSONEachRow",
             "--param_counter_id", str(reference["counter_id"]), "--query", sql,
         ]
-        if query_id:
-            command.extend(["--query_id", query_id])
         return [json.loads(line) for line in run(command).splitlines() if line]
 
-    disk_before = query("SELECT name, free_space, total_space FROM system.disks")
     architecture, cpus, memory = run([
         "info", "--format", "{{.Architecture}} {{.NCPU}} {{.MemTotal}}",
     ]).split()
@@ -64,32 +58,24 @@ def main():
             "--multiquery",
         ], sql_input=ddl)
 
-    query_ids = []
     if int(query("SELECT count() AS rows FROM nis_smoke.hits")[0]["rows"]) == 0:
         run(["exec", args.container, "mkdir", "-p", "/var/lib/clickhouse/user_files/nis-checkpoint-1"])
         run(["cp", str(sample), f"{args.container}:/var/lib/clickhouse/user_files/nis-checkpoint-1/hits_small.parquet"])
-        load_id = "nis-checkpoint-1-load-" + uuid.uuid4().hex
-        query_ids.append(load_id)
         query(
             "INSERT INTO nis_smoke.hits SELECT * "
             "FROM file('nis-checkpoint-1/hits_small.parquet', Parquet) "
             "SETTINGS max_threads = 2, max_insert_threads = 2, max_memory_usage = 3221225472",
-            query_id=load_id,
         )
 
     stats = query(
         "SELECT count() AS rows, uniqExact(CounterID) AS distinct_counters, "
         "uniqExact(UserID) AS distinct_users, "
         f"countIf(xxHash64(toString(toUInt64(WatchID))) % {manifest['modulus']} "
-        f"!= {manifest['remainder']}) AS outside_sample, "
-        "toString(min(EventTime), 'UTC') AS first_event_utc, "
-        "toString(max(EventTime), 'UTC') AS last_event_utc FROM nis_smoke.hits "
+        f"!= {manifest['remainder']}) AS outside_sample FROM nis_smoke.hits "
         "SETTINGS max_threads = 2, max_memory_usage = 3221225472"
     )[0]
     probe_sql = (root / "sql/checkpoint-1-clickbench-probe.sql").read_text().strip().rstrip(";")
-    probe_id = "nis-checkpoint-1-probe-" + uuid.uuid4().hex
-    query_ids.append(probe_id)
-    actual = query(probe_sql, query_id=probe_id)[0]
+    actual = query(probe_sql)[0]
     actual = {key: int(value) for key, value in actual.items()}
     checks = {
         "row_count_matches_parquet": int(stats["rows"]) == reference["rows"],
@@ -98,48 +84,39 @@ def main():
         "all_rows_satisfy_hash_predicate": int(stats["outside_sample"]) == 0,
         "probe_matches_python_reference": actual == reference["expected"],
     }
-    explain_sql = probe_sql.replace(
-        "SETTINGS max_threads = 2, use_query_cache = 0",
-        "SETTINGS max_threads = 2, use_query_cache = 0, "
-        "use_query_condition_cache = 0, use_skip_indexes_on_data_read = 0",
-    )
-    explain = query("EXPLAIN indexes = 1 " + explain_sql)
-    parts = query(
-        "SELECT name, rows, marks, bytes_on_disk, data_uncompressed_bytes "
+    table_bytes = query(
+        "SELECT sum(bytes_on_disk) AS bytes "
         "FROM system.parts WHERE database = 'nis_smoke' AND table = 'hits' "
-        "AND active ORDER BY name"
-    )
-    query("SYSTEM FLUSH LOGS")
-    quoted_ids = ", ".join("'" + value + "'" for value in query_ids)
-    profiles = query(
-        "SELECT query_id, query_duration_ms, read_rows, read_bytes, written_rows, memory_usage "
-        f"FROM system.query_log WHERE type = 'QueryFinish' AND (query_id IN ({quoted_ids}) "
-        f"OR (query_id LIKE 'nis-checkpoint-1-load-%' AND written_rows = {manifest['rows']})) "
-        "ORDER BY event_time_microseconds"
-    )
+        "AND active"
+    )[0]["bytes"]
+    free_bytes = query("SELECT min(free_space) AS bytes FROM system.disks")[0]["bytes"]
     result = {
         "server_version": query("SELECT version() AS version")[0]["version"],
-        "resources": {"architecture": architecture, "cpus": int(cpus), "memory_bytes": int(memory)},
+        "resources": {
+            "architecture": architecture, "cpus": int(cpus), "memory_bytes": int(memory),
+            "table_bytes": int(table_bytes), "free_disk_bytes": int(free_bytes),
+            "preparation_peak_rss_bytes": manifest["preparation_peak_rss_bytes"],
+        },
         "stats": stats,
         "counter_id": reference["counter_id"],
         "expected": reference["expected"],
         "actual": actual,
         "checks": checks,
         "passed": all(checks.values()),
-        "parts": parts,
-        "explain": explain,
-        "query_profiles": profiles,
-        "disk_before": disk_before,
-        "disk_after": query("SELECT name, free_space, total_space FROM system.disks"),
-        "ddl": query("SHOW CREATE TABLE nis_smoke.hits"),
-        "granularity": query(
-            "SELECT name, value FROM system.merge_tree_settings "
-            "WHERE name IN ('index_granularity', 'index_granularity_bytes')"
-        ),
-        "commands": commands,
     }
-    (artifacts / "clickbench-sample.json").write_text(json.dumps(manifest, indent=2) + "\n")
-    (artifacts / "clickbench-reference.json").write_text(json.dumps(reference, indent=2) + "\n")
+    sample_info = {key: manifest[key] for key in (
+        "clickbench_revision", "sql_predicate", "source_rows", "rows", "columns",
+        "sample_file", "sample_bytes", "sample_sha256",
+    )}
+    sample_info["source_count"] = len(manifest["sources"])
+    sample_info["source_url_template"] = (
+        manifest["sources"][0]["url"].rsplit("/", 1)[0] + "/hits_{part}.parquet"
+    )
+    expected = {key: reference[key] for key in (
+        "method", "rows", "distinct_counters", "distinct_users", "counter_id", "query", "expected",
+    )}
+    (artifacts / "clickbench-sample.json").write_text(json.dumps(sample_info, indent=2) + "\n")
+    (artifacts / "clickbench-reference.json").write_text(json.dumps(expected, indent=2) + "\n")
     (artifacts / "clickbench-check.json").write_text(json.dumps(result, indent=2) + "\n")
     print(json.dumps({"passed": result["passed"], "stats": stats, "expected": reference["expected"], "actual": actual}), flush=True)
     if not result["passed"]:
