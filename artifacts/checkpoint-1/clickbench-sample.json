@@ -1,0 +1,12 @@
+{
+  "clickbench_revision": "fa52f8524ad9446695018fda6a415aade3a4ccd9",
+  "sql_predicate": "xxHash64(toString(toUInt64(WatchID))) % 100 = 0",
+  "source_rows": 99997497,
+  "rows": 1000659,
+  "columns": 105,
+  "sample_file": "hits_small.parquet",
+  "sample_bytes": 172572435,
+  "sample_sha256": "dae45e89903e835d8d40b0b223e18d3182d2dc92c78cf37431ce7cb89f3b1af5",
+  "source_count": 100,
+  "source_url_template": "https://datasets.clickhouse.com/hits_compatible/athena_partitioned/hits_{part}.parquet"
+}

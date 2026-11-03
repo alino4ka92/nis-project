@@ -1,0 +1,34 @@
+{
+  "server_version": "26.9.27.3",
+  "resources": {
+    "architecture": "aarch64",
+    "cpus": 4,
+    "memory_bytes": 8307822592,
+    "table_bytes": 236261859,
+    "free_disk_bytes": 5188018176,
+    "preparation_peak_rss_bytes": 880103424
+  },
+  "stats": {
+    "rows": 1000659,
+    "distinct_counters": 3830,
+    "distinct_users": 823561,
+    "outside_sample": 0
+  },
+  "counter_id": 251755,
+  "expected": {
+    "matched_rows": 1004,
+    "width_sum": 1522846
+  },
+  "actual": {
+    "matched_rows": 1004,
+    "width_sum": 1522846
+  },
+  "checks": {
+    "row_count_matches_parquet": true,
+    "counters_match_parquet": true,
+    "users_match_parquet": true,
+    "all_rows_satisfy_hash_predicate": true,
+    "probe_matches_python_reference": true
+  },
+  "passed": true
+}

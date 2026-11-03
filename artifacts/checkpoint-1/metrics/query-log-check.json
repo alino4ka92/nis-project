@@ -1,0 +1,18 @@
+[
+  {
+    "type": "QueryFinish",
+    "query_id": "nis-kt1-metrics-a15252692a8d4e13bc3eaadb8275dca7-q1-measure1"
+  },
+  {
+    "type": "QueryFinish",
+    "query_id": "nis-kt1-metrics-a15252692a8d4e13bc3eaadb8275dca7-q1-measure2"
+  },
+  {
+    "type": "QueryFinish",
+    "query_id": "nis-kt1-metrics-a15252692a8d4e13bc3eaadb8275dca7-q1-measure3"
+  },
+  {
+    "type": "QueryFinish",
+    "query_id": "nis-kt1-metrics-a15252692a8d4e13bc3eaadb8275dca7-q1-warm1"
+  }
+]

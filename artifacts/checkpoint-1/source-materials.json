@@ -1,0 +1,36 @@
+{
+  "sources": {
+    "clickhouse": {
+      "sha": "2da63c1b42ca1b31e42fae8837c6508a0eb07cff"
+    },
+    "clickbench": {
+      "sha": "fa52f8524ad9446695018fda6a415aade3a4ccd9"
+    }
+  },
+  "files": [
+    {
+      "path": "third_party/clickbench/README.md",
+      "sha256": "fda255fb1d83d70f06866d768e9ce58cc14c4c89aef44441937295cc35053ac0"
+    },
+    {
+      "path": "third_party/clickbench/LICENSE",
+      "sha256": "9d42e8bf72619767ff7534116151204a976a4894a5082ed45db977e63360e215"
+    },
+    {
+      "path": "third_party/clickbench/clickhouse/create.sql",
+      "sha256": "c1082ee0d86467a7c66ce3059e37461333d7078b288935f7c93fd6d92102a3dd"
+    },
+    {
+      "path": "third_party/clickbench/clickhouse/queries.sql",
+      "sha256": "a7d6673357348ee9680443216b6f26f30d1dce9f313b419d38502417b2c2a219"
+    },
+    {
+      "path": "third_party/clickbench/clickhouse/load",
+      "sha256": "8b9ed1f9619cd26c372a052950c8b8297cc01637f912db6566cd849042567f3d"
+    },
+    {
+      "path": "third_party/clickbench/clickhouse/install",
+      "sha256": "d5168178c87df9d3065d3ab860f60993904df0a6e31853cb6fc0e732cd16674b"
+    }
+  ]
+}

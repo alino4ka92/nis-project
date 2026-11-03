@@ -1,31 +1,22 @@
-# Название проекта
+# ClickHouse: отсечение данных
 
-**Проектное задание:** [название и ссылка]
+**Задание:** [P12-A](https://distsys.ru/osukhoroslov/nis2/src/branch/main/project-tasks/p12-a-clickhouse-data-skipping.md)
 
 **Участники:**
 
-- Полное имя
-- Полное имя
-- Полное имя
+- Еремина Ксения Дмитриевна
+- Балабекян Андрей Александрович (V0S7ER)
+- Поливин Никита Евгеньевич
 
-## Сокращённый запуск
+## Запуск
 
-К первой контрольной точке укажите требования к окружению и команды технических проверок или ссылку на них в `nis/checkpoints/01.md`. Ко второй точке добавьте команды запуска небольшого сквозного примера на обычной машине.
+Нужны Docker Compose и Python 3.11+. [Команды запуска](docker/checkpoint-1/README.md), настройки — в [compose.yaml](compose.yaml). Датасет создаётся локально из всех 100 частей ClickBench с отбором по хешу.
 
-```text
-команды запуска
-```
+## Материалы
 
-## Навигация
-
-- [Описание проекта](nis/project.md)
-- [План эксперимента](nis/experiment-plan.md)
-- [Контрольная точка 1](nis/checkpoints/01.md)
-- [Контрольная точка 2](nis/checkpoints/02.md)
-- [Контрольная точка 3](nis/checkpoints/03.md)
-- [Состояние проекта](nis/status.md)
-- [Результаты](nis/results.md)
-- [Финальная версия](nis/final.md)
-- Код: [путь]
-- Тесты: [путь]
-- Данные: [путь или описание внешнего хранилища]
+- [Проект](nis/project.md), [план эксперимента](nis/experiment-plan.md), [КТ-1](nis/checkpoints/01.md).
+- [Технические проверки](nis/technical-checks.md) и [результат запуска бенчмарка](artifacts/checkpoint-1/benchmark/run.tsv).
+- [Проверка пяти метрик](artifacts/checkpoint-1/metrics/README.md): ответы проверочного запроса, измерения, `EXPLAIN` и сводка повторов.
+- [Создание четырёх таблиц, запросы и настройки сравнения](sql/data-skipping/README.md).
+- [Код](scripts/checkpoint-1/), [SQL](sql/), [манифест датасета](artifacts/checkpoint-1/clickbench-sample.json). Данные хранятся в Docker volume и `.local/`.
+- [Состояние](nis/status.md), [результаты](nis/results.md), [финальная сдача](nis/final.md).

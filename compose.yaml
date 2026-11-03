@@ -1,0 +1,78 @@
+name: nis-project
+
+services:
+  clickhouse:
+    image: clickhouse/clickhouse-server:26.9.27.3
+    container_name: nis-clickhouse
+    ulimits:
+      nofile:
+        soft: 262144
+        hard: 262144
+    volumes:
+      - clickhouse-data:/var/lib/clickhouse
+      - ./sql:/opt/nis/sql:ro
+    healthcheck:
+      test: ["CMD", "clickhouse-client", "--query", "SELECT 1"]
+      interval: 2s
+      timeout: 5s
+      retries: 30
+      start_period: 5s
+
+  download:
+    profiles: [tools]
+    image: nis-clickbench-data
+    build:
+      context: ./scripts/checkpoint-1
+      dockerfile: ../../docker/checkpoint-1/data.Dockerfile
+    cpus: 2
+    mem_limit: 1g
+    volumes:
+      - clickbench-sources:/data
+    command: ["python", "download_sources.py", "--output", "/data", "--workers", "8"]
+
+  prepare:
+    profiles: [tools]
+    image: nis-clickbench-data
+    build:
+      context: ./scripts/checkpoint-1
+      dockerfile: ../../docker/checkpoint-1/data.Dockerfile
+    cpus: 2
+    mem_limit: 3g
+    volumes:
+      - clickbench-sources:/sources:ro
+      - ./.local/data/checkpoint-1-all:/data
+    command:
+      - bash
+      - -c
+      - >-
+        python prepare_sample.py --source-dir /sources --source-count 100
+        --output /data --modulus 100 --remainder 0
+        && python reference.py /data/hits_small.parquet --output /data/reference.json
+
+  benchmark:
+    profiles: [tools]
+    image: nis-clickbench-benchmark
+    build:
+      context: .
+      dockerfile: docker/checkpoint-1/benchmark.Dockerfile
+    depends_on:
+      clickhouse:
+        condition: service_healthy
+    network_mode: service:clickhouse
+    cpus: 1
+    mem_limit: 1g
+    environment:
+      NIS_CLICKHOUSE_HOST: 127.0.0.1
+      NIS_DATABASE: nis_smoke
+      NIS_WARMUP_RUNS: "1"
+      NIS_MEASURED_RUNS: "3"
+      NIS_MAX_THREADS: "2"
+      NIS_MEMORY_LIMIT_BYTES: "3221225472"
+    volumes:
+      - ./.local/results/clickbench:/results
+
+volumes:
+  clickhouse-data:
+    name: nis-clickhouse-data-26-9-27-3
+  clickbench-sources:
+    name: nis-clickbench-sources

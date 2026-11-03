@@ -1,0 +1,12 @@
+{
+  "method": "PyArrow reads the frozen Parquet; Python counts and sums the original values",
+  "rows": 1000659,
+  "distinct_counters": 3830,
+  "distinct_users": 823561,
+  "counter_id": 251755,
+  "query": "SELECT count() AS matched_rows, sum(ResolutionWidth) AS width_sum FROM nis_smoke.hits WHERE CounterID = 251755",
+  "expected": {
+    "matched_rows": 1004,
+    "width_sum": 1522846
+  }
+}

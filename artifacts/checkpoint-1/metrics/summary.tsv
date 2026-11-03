@@ -1,0 +1,2 @@
+query_number	repeats	elapsed_ms_median	elapsed_ms_min	elapsed_ms_max	read_rows_median	read_rows_min	read_rows_max	read_bytes_median	read_bytes_min	read_bytes_max	cpu_time_us_median	cpu_time_us_min	cpu_time_us_max	memory_usage_bytes_median	memory_usage_bytes_min	memory_usage_bytes_max
+1	3	2	2	24	16384	16384	16384	81920	81920	81920	2772	2248	24728	404869	404869	435765
