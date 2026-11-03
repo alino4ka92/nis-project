@@ -4,3 +4,9 @@
 __pycache__/
 *.pyc
 *.parquet
+
+/checkpoint-1-plan-ru.md
+/participant-1-guide-ru.md
+/clickhouse-summary-ru.md
+/clickhouse-summary-assets/
+/clickhouse-vldb2024.pdf
